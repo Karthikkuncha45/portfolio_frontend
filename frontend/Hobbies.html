@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthik's Hobbies</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Specific styling for hobbies page */
+        .hobbies-heading {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            color: #ff8585;
+            font-size: 2.5rem;
+            text-shadow: 0 0 8px rgba(255, 133, 133, 0.3);
+        }
+
+        .hobbies-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff8585, transparent);
+        }
+
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 5%;
+        }
+
+        .hobby-card {
+            background: rgba(30, 30, 47, 0.6);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-in-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hobby-card:nth-child(1) { animation-delay: 0.1s; }
+        .hobby-card:nth-child(2) { animation-delay: 0.2s; }
+        .hobby-card:nth-child(3) { animation-delay: 0.3s; }
+        .hobby-card:nth-child(4) { animation-delay: 0.4s; }
+        .hobby-card:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Reduced hover effect */
+        .hobby-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 22px rgba(255, 133, 133, 0.25);
+        }
+
+        /* Simplified border effect */
+        .hobby-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                #ff8585, 
+                #ffb876, 
+                #fff069, 
+                #ff8585);
+            z-index: -1;
+            border-radius: 17px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .hobby-card:hover::before {
+            opacity: 0.6;
+        }
+
+        .hobby-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffb876;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .hobby-card:hover .hobby-icon {
+            transform: scale(1.1);
+            color: #ff8585;
+        }
+
+        .hobby-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #ffe6e6;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hobby-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff8585;
+            transition: width 0.3s ease;
+        }
+
+        .hobby-card:hover .hobby-title::after {
+            width: 100%;
+        }
+
+        .hobby-description {
+            color: #f0d2d2;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .hobby-details {
+            list-style-type: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .hobby-details li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            color: #e0c4c4;
+            transition: transform 0.2s ease;
+        }
+
+        .hobby-details li:hover {
+            transform: translateX(3px);
+            color: #ffffff;
+        }
+
+        .hobby-details li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #ffb876;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 2rem auto;
+            background: linear-gradient(90deg, #ff8585, #ffb876);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 133, 133, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 133, 133, 0.4);
+        }
+
+        .back-link-container {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* For mobile devices */
+        @media (max-width: 768px) {
+            .hobbies-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .hobbies-heading {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Hamburger Menu Button for Mobile -->
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <!-- Navbar with Horizontal Scroll -->
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#achievements">Achievements</a></li>
+                    <li><a href="index.html#certifications">Certifications</a></li>
+                    <li><a href="index.html#internships">Internships</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="hobbies.html" class="active">Hobbies</a></li>
+                    <li><a href="education.html">Education</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h1 class="hobbies-heading">My Hobbies & Interests</h1>
+        
+        <div class="hobbies-container">
+            <div class="hobby-card">
+                <div class="hobby-icon">💻</div>
+                <h2 class="hobby-title">Coding</h2>
+                <p class="hobby-description">As a passionate programmer, I constantly challenge myself with coding problems to enhance my algorithmic thinking.</p>
+                <ul class="hobby-details">
+                    <li>Solved 150+ problems on LeetCode</li>
+                    <li>Completed 50+ challenges on GeeksforGeeks</li>
+                    <li>Created 400+ basic programs on CodeMind</li>
+                </ul>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-icon">🌐</div>
+                <h2 class="hobby-title">Online Surfing</h2>
+                <p class="hobby-description">I love exploring the vast knowledge available online, expanding my horizons in various fields.</p>
+                <ul class="hobby-details">
+                    <li>Researching interesting facts</li>
+                    <li>Learning advanced techniques</li>
+                    <li>Exploring robotics developments</li>
+                    <li>Staying updated with current affairs</li>
+                </ul>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-icon">🏏</div>
+                <h2 class="hobby-title">Playing Cricket</h2>
+                <p class="hobby-description">Cricket isn't just a sport for me; it's a passion that helps me stay fit and connected with friends.</p>
+                <ul class="hobby-details">
+                    <li>Play regularly during weekends and holidays</li>
+                    <li>Enjoy both batting and bowling</li>
+                    <li>Participate in friendly neighborhood matches</li>
+                </ul>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-icon">🍳</div>
+                <h2 class="hobby-title">Cooking</h2>
+                <p class="hobby-description">The kitchen is my creative space where I experiment with flavors and techniques.</p>
+                <ul class="hobby-details">
+                    <li>Try new recipes from various cuisines</li>
+                    <li>Experiment with different ingredients</li>
+                    <li>Prepare meals for family and friends</li>
+                </ul>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-icon">🥾</div>
+                <h2 class="hobby-title">Hiking with Friends</h2>
+                <p class="hobby-description">Exploring nature's beauty while creating lasting memories with friends.</p>
+                <ul class="hobby-details">
+                    <li>Regular trips to famous neighboring places</li>
+                    <li>Discovering hidden trails and scenic spots</li>
+                    <li>Enjoying the natural beauty of my region</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="back-link-container">
+            <a href="index.html" class="back-link">Back to Homepage</a>
+        </div>
+    </section>
+    
+    <footer>
+        <p class="copyright">Copyright 2025 Karthik. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navContainer = document.querySelector('.nav-container');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navContainer.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Animate hobby cards when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            document.querySelectorAll('.hobby-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
