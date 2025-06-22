@@ -1,286 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karthik's Hobbies</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="script.js" defer></script>
-    <style>
-        /* Specific styling for hobbies page */
-        .hobbies-heading {
-            text-align: center;
-            margin: 2rem 0;
-            position: relative;
-            color: aqua;
-            font-size: 2.5rem;
-            text-shadow: 0 0 8px rgba(255, 133, 133, 0.3);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skills</title>
 
-        .hobbies-heading::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ff8585, transparent);
-        }
+  <link rel="stylesheet" href="styles.css">
 
-        .hobbies-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 5%;
-        }
+  <!-- AOS Animation CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-        .hobby-card {
-            background: rgba(30, 30, 47, 0.6);
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 0.8s ease-in-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 
-        .hobby-card:nth-child(1) { animation-delay: 0.1s; }
-        .hobby-card:nth-child(2) { animation-delay: 0.2s; }
-        .hobby-card:nth-child(3) { animation-delay: 0.3s; }
-        .hobby-card:nth-child(4) { animation-delay: 0.4s; }
-        .hobby-card:nth-child(5) { animation-delay: 0.5s; }
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        /* Reduced hover effect */
-        .hobby-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 22px rgba(255, 133, 133, 0.25);
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
 
-        /* Simplified border effect */
-        .hobby-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: aqua;
-            z-index: -1;
-            border-radius: 17px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    :root {
+      --primary-color: #00ffe7;
+      --dark-bg: #0f0f0f;
+      --card-bg: #1c1c1c;
+      --text-light: #f1f1f1;
+      --text-gray: #ccc;
+      --navbar-height: 70px;
+    }
 
-        .hobby-card:hover::before {
-            opacity: 0.6;
-        }
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      overflow-x: hidden;
+      padding-top: var(--navbar-height);
+    }
 
-        .hobby-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #ffb876;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
+    /* Main Content Styles */
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
 
-        .hobby-card:hover .hobby-icon {
-            transform: scale(1.1);
-            color: #ff8585;
-        }
+    .page-title {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+      padding-bottom: 15px;
+    }
 
-        .hobby-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: #ffe6e6;
-            position: relative;
-            display: inline-block;
-        }
+    .page-title h1 {
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
 
-        .hobby-title::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #ff8585;
-            transition: width 0.3s ease;
-        }
+    .page-title p {
+      color: var(--text-gray);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-        .hobby-card:hover .hobby-title::after {
-            width: 100%;
-        }
+    .page-title::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 3px;
+      background: var(--primary-color);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    /* Skills Section Styles */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .skill-card {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 255, 231, 0.15);
+    }
+    
+    .skill-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    
+    .skill-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+    
+    .skill-rating {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    .skill-progress-container {
+      width: 100%;
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    
+    .skill-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0, 255, 231, 0.8), rgba(0, 255, 231, 0.5));
+      border-radius: 10px;
+      transition: width 1s ease;
+    }
+    
+    .skill-description {
+      margin-top: 15px;
+      color: var(--text-gray);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .skill-icon {
+      font-size: 2rem;
+      margin-right: 15px;
+      color: var(--primary-color);
+    }
+    
+    .skill-header-content {
+      display: flex;
+      align-items: center;
+    }
+    
+    /* Skills Summary */
+    .skills-summary {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 40px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .skills-summary p {
+      color: var(--text-gray);
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
 
-        .hobby-description {
-            color: #f0d2d2;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
+    @media (max-width: 768px) {
+      .page-title h1 {
+        font-size: 2rem;
+      }
+      
+      .skill-card {
+        padding: 20px;
+      }
+    }
 
-        .hobby-details {
-            list-style-type: none;
-            padding: 0;
-            margin: 1rem 0;
-        }
-
-        .hobby-details li {
-            padding: 0.5rem 0;
-            position: relative;
-            padding-left: 1.5rem;
-            color: #e0c4c4;
-            transition: transform 0.2s ease;
-        }
-
-        .hobby-details li:hover {
-            transform: translateX(3px);
-            color: #ffffff;
-        }
-
-        .hobby-details li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: #ffb876;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin: 2rem auto;
-            background: aqua;
-            color: black;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 133, 133, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .back-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 133, 133, 0.4);
-        }
-
-        .back-link-container {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* For mobile devices */
-        @media (max-width: 768px) {
-            .hobbies-container {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-            
-            .hobbies-heading {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    @media (max-width: 480px) {
+      .page-title h1 {
+        font-size: 1.7rem;
+      }
+      
+      .skill-name {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <!-- Navbar with Horizontal Scroll -->
-            <div class="nav-container">
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#achievements">Achievements</a></li>
-                    <li><a href="#certifications">Certifications</a></li>
-                    <li><a href="Internship.html">Internships</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="skills.html">Skills</a></li>
-                    <li><a href="Hobbies.html">Hobbies</a></li>
-                    <li><a href="education.html">Education</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <!-- Navbar with Horizontal Scroll - Same as index.html -->
+      <div class="nav-container">
+        <ul class="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#achievements">Achievements</a></li>
+          <li><a href="index.html#certifications">Certifications</a></li>
+          <li><a href="Internship.html">Internships</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="skills.html" class="active">Skills</a></li>
+          <li><a href="Hobbies.html">Hobbies</a></li>
+          <li><a href="education.html">Education</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-    <section class="content-section">
-        <h1 class="hobbies-heading">My Hobbies & Interests</h1>
-        
-        <div class="hobbies-container">
-            <div class="hobby-card">
-                <div class="hobby-icon">💻</div>
-                <h2 class="hobby-title">Coding</h2>
-                <p class="hobby-description">As a passionate programmer, I constantly challenge myself with coding problems to enhance my algorithmic thinking.</p>
-                <ul class="hobby-details">
-                    <li>Solved 150+ problems on LeetCode</li>
-                    <li>Completed 50+ challenges on GeeksforGeeks</li>
-                    <li>Created 400+ basic programs on CodeMind</li>
-                </ul>
-            </div>
-
-            <div class="hobby-card">
-                <div class="hobby-icon">🌐</div>
-                <h2 class="hobby-title">Online Surfing</h2>
-                <p class="hobby-description">I love exploring the vast knowledge available online, expanding my horizons in various fields.</p>
-                <ul class="hobby-details">
-                    <li>Researching interesting facts</li>
-                    <li>Learning advanced techniques</li>
-                    <li>Exploring robotics developments</li>
-                    <li>Staying updated with current affairs</li>
-                </ul>
-            </div>
-
-            <div class="hobby-card">
-                <div class="hobby-icon">🏏</div>
-                <h2 class="hobby-title">Playing Cricket</h2>
-                <p class="hobby-description">Cricket isn't just a sport for me; it's a passion that helps me stay fit and connected with friends.</p>
-                <ul class="hobby-details">
-                    <li>Play regularly during weekends and holidays</li>
-                    <li>Enjoy both batting and bowling</li>
-                    <li>Participate in friendly neighborhood matches</li>
-                </ul>
-            </div>
-
-            <div class="hobby-card">
-                <div class="hobby-icon">🍳</div>
-                <h2 class="hobby-title">Cooking</h2>
-                <p class="hobby-description">The kitchen is my creative space where I experiment with flavors and techniques.</p>
-                <ul class="hobby-details">
-                    <li>Try new recipes from various cuisines</li>
-                    <li>Experiment with different ingredients</li>
-                    <li>Prepare meals for family and friends</li>
-                </ul>
-            </div>
-
-            <div class="hobby-card">
-                <div class="hobby-icon">🥾</div>
-                <h2 class="hobby-title">Hiking with Friends</h2>
-                <p class="hobby-description">Exploring nature's beauty while creating lasting memories with friends.</p>
-                <ul class="hobby-details">
-                    <li>Regular trips to famous neighboring places</li>
-                    <li>Discovering hidden trails and scenic spots</li>
-                    <li>Enjoying the natural beauty of my region</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="back-link-container">
-            <a href="index.html" class="back-link">Back to Homepage</a>
-        </div>
-    </section>
+  <div class="container">
+    <div class="page-title" data-aos="fade-down">
+      <h1>Technical Skills</h1>
+      <p>A comprehensive overview of my technical expertise and proficiency levels</p>
+    </div>
     
-    <footer>
-        <p class="copyright">Copyright 2025 Karthik. All Rights Reserved.</p>
-    </footer>
+    <!-- Skills Summary -->
+    <div class="skills-summary" data-aos="fade-up">
+      <p>I am a computer science student specializing in AI & Machine Learning with strong problem-solving skills. My technical foundation includes proficiency in Python programming with extensive experience solving algorithmic problems. I've applied my machine learning knowledge to real-world projects and have working knowledge of web development technologies and database management systems.</p>
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="skills-container">
+      <!-- Python Skill -->
+      <div class="skill-card" data-aos="fade-up">
+        <div class="skill-header">
+          <div class="skill-header-content">
+            <i class="fab fa-python skill-icon"></i>
+            <div>
+              <div class="skill-name">Python</div>
+            </div>
+          </div>
+          <div class="skill-rating">8/10</div>
+        </div>
+        <div class="skill-progress-container">
+          <div class="skill-progress-bar" style="width: 80%;"></div>
+        </div>
+        <div class="skill-description">
+          Strong proficiency in Python programming with experience solving 150+ LeetCode problems and 400+ basic problems on CodeMind. Comfortable with algorithm implementation, data structures, and Python libraries for various applications.
+        </div>
+      </div>
+      
+      <!-- Machine Learning Skill -->
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="skill-header">
+          <div class="skill-header-content">
+            <i class="fas fa-brain skill-icon"></i>
+            <div>
+              <div class="skill-name">Machine Learning</div>
+            </div>
+          </div>
+          <div class="skill-rating">8/10</div>
+        </div>
+        <div class="skill-progress-container">
+          <div class="skill-progress-bar" style="width: 80%;"></div>
+        </div>
+        <div class="skill-description">
+          Applied machine learning knowledge to build a house price prediction model for mini-project. Currently working on deep learning applications for final year project. Familiar with various ML algorithms and frameworks.
+        </div>
+      </div>
+      
+      <!-- MySQL Skill -->
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="skill-header">
+          <div class="skill-header-content">
+            <i class="fas fa-database skill-icon"></i>
+            <div>
+              <div class="skill-name">MySQL Database</div>
+            </div>
+          </div>
+          <div class="skill-rating">8/10</div>
+        </div>
+        <div class="skill-progress-container">
+          <div class="skill-progress-bar" style="width: 80%;"></div>
+        </div>
+        <div class="skill-description">
+          Strong proficiency in MySQL database management. Can perform all standard database operations including complex queries, database design, normalization, and optimization. Experienced in integrating databases with applications.
+        </div>
+      </div>
+      
+      <!-- Java Skill -->
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="skill-header">
+          <div class="skill-header-content">
+            <i class="fab fa-java skill-icon"></i>
+            <div>
+              <div class="skill-name">Java</div>
+            </div>
+          </div>
+          <div class="skill-rating">7/10</div>
+        </div>
+        <div class="skill-progress-container">
+          <div class="skill-progress-bar" style="width: 70%;"></div>
+        </div>
+        <div class="skill-description">
+          Proficient in Java programming with understanding of object-oriented programming concepts, exception handling, and Java collections. Capable of developing applications and solving algorithmic problems using Java.
+        </div>
+      </div>
+      
+      <!-- Frontend Technologies Skill -->
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="skill-header">
+          <div class="skill-header-content">
+            <i class="fas fa-code skill-icon"></i>
+            <div>
+              <div class="skill-name">Frontend Technologies</div>
+            </div>
+          </div>
+          <div class="skill-rating">6/10</div>
+        </div>
+        <div class="skill-progress-container">
+          <div class="skill-progress-bar" style="width: 60%;"></div>
+        </div>
+        <div class="skill-description">
+          Working knowledge of HTML, CSS, and JavaScript. Have built multiple projects using these technologies, leveraging AI tools for assistance. Capable of creating responsive and visually appealing web interfaces.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="copyright">Copyright 2025 Karthik. All Rights Reserved.</p>
+  </footer>
+
+  <!-- AOS Animation Script -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="script.js" defer></script>
+  
+  <!-- Custom Scripts -->
+  <script>
+    // Initialize AOS animation library
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+  </script>
 </body>
 </html>
