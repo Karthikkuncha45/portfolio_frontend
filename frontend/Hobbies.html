@@ -8,13 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
     <style>
         /* Specific styling for hobbies page */
         .hobbies-heading {
             text-align: center;
             margin: 2rem 0;
             position: relative;
-            color: #ff8585;
+            color: aqua;
             font-size: 2.5rem;
             text-shadow: 0 0 8px rgba(255, 133, 133, 0.3);
         }
@@ -70,11 +71,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, 
-                #ff8585, 
-                #ffb876, 
-                #fff069, 
-                #ff8585);
+            background: aqua;
             z-index: -1;
             border-radius: 17px;
             opacity: 0;
@@ -157,8 +154,8 @@
         .back-link {
             display: inline-block;
             margin: 2rem auto;
-            background: linear-gradient(90deg, #ff8585, #ffb876);
-            color: white;
+            background: aqua;
+            color: black;
             padding: 0.8rem 2rem;
             border-radius: 30px;
             text-decoration: none;
@@ -200,23 +197,16 @@
 <body>
     <header>
         <nav>
-            <!-- Hamburger Menu Button for Mobile -->
-            <div class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            
             <!-- Navbar with Horizontal Scroll -->
             <div class="nav-container">
                 <ul class="nav-menu">
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#achievements">Achievements</a></li>
-                    <li><a href="index.html#certifications">Certifications</a></li>
-                    <li><a href="index.html#internships">Internships</a></li>
-                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="Internship.html">Internships</a></li>
+                    <li><a href="#projects">Projects</a></li>
                     <li><a href="skills.html">Skills</a></li>
-                    <li><a href="hobbies.html" class="active">Hobbies</a></li>
+                    <li><a href="Hobbies.html">Hobbies</a></li>
                     <li><a href="education.html">Education</a></li>
                 </ul>
             </div>
@@ -292,36 +282,5 @@
     <footer>
         <p class="copyright">Copyright 2025 Karthik. All Rights Reserved.</p>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const navContainer = document.querySelector('.nav-container');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                this.classList.toggle('active');
-                navContainer.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-            
-            // Animate hobby cards when they come into view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, {
-                threshold: 0.2
-            });
-
-            document.querySelectorAll('.hobby-card').forEach(card => {
-                observer.observe(card);
-            });
-        });
-    </script>
 </body>
 </html>
