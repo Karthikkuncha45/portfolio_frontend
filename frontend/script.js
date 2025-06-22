@@ -1,92 +1,242 @@
-// Updated Navigation JavaScript - Horizontal Scrolling Only
+// Navigation JavaScript - Fixed for Mixed Internal/External Links
 document.addEventListener('DOMContentLoaded', function() {
+    // Get current page
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
     // Elements
     const navContainer = document.querySelector('.nav-container');
     const navLinks = document.querySelectorAll('.nav-menu li a');
     
-    // Active link highlighting based on scroll position
+    // Define navigation mappings for different pages
+    const navigationMap = {
+        'index.html': {
+            'home': '#home',
+            'achievements': '#achievements', 
+            'certifications': '#certifications',
+            'internships': 'Internship.html',
+            'projects': '#projects',
+            'skills': 'skills.html',
+            'hobbies': 'Hobbies.html',
+            'education': 'education.html'
+        },
+        'Internship.html': {
+            'home': 'index.html',
+            'achievements': 'index.html#achievements',
+            'certifications': 'index.html#certifications', 
+            'internships': 'Internship.html',
+            'projects': 'index.html#projects',
+            'skills': 'skills.html',
+            'hobbies': 'Hobbies.html',
+            'education': 'education.html'
+        },
+        'skills.html': {
+            'home': 'index.html',
+            'achievements': 'index.html#achievements',
+            'certifications': 'index.html#certifications',
+            'internships': 'Internship.html', 
+            'projects': 'index.html#projects',
+            'skills': 'skills.html',
+            'hobbies': 'Hobbies.html',
+            'education': 'education.html'
+        },
+        'Hobbies.html': {
+            'home': 'index.html',
+            'achievements': 'index.html#achievements',
+            'certifications': 'index.html#certifications',
+            'internships': 'Internship.html',
+            'projects': 'index.html#projects', 
+            'skills': 'skills.html',
+            'hobbies': 'Hobbies.html',
+            'education': 'education.html'
+        },
+        'education.html': {
+            'home': 'index.html',
+            'achievements': 'index.html#achievements',
+            'certifications': 'index.html#certifications',
+            'internships': 'Internship.html',
+            'projects': 'index.html#projects',
+            'skills': 'skills.html', 
+            'hobbies': 'Hobbies.html',
+            'education': 'education.html'
+        }
+    };
+
+    // Update navigation links based on current page
+    function updateNavigation() {
+        const currentPageMap = navigationMap[currentPage] || navigationMap['index.html'];
+        
+        navLinks.forEach(link => {
+            const linkText = link.textContent.toLowerCase().trim();
+            
+            // Map link text to navigation keys
+            let navKey;
+            switch(linkText) {
+                case 'home': navKey = 'home'; break;
+                case 'achievements': navKey = 'achievements'; break;
+                case 'certifications': navKey = 'certifications'; break;
+                case 'internships': navKey = 'internships'; break;
+                case 'projects': navKey = 'projects'; break;
+                case 'skills': navKey = 'skills'; break;
+                case 'hobbies': navKey = 'hobbies'; break;
+                case 'education': navKey = 'education'; break;
+                default: return; // Skip unknown links
+            }
+            
+            // Update href attribute
+            if (currentPageMap[navKey]) {
+                link.href = currentPageMap[navKey];
+            }
+        });
+    }
+    
+    // Function to check if a link is an external page link
+    function isExternalPageLink(href) {
+        return href && (
+            href.endsWith('.html') || 
+            href.includes('/') ||
+            href.startsWith('http') ||
+            (!href.startsWith('#'))
+        );
+    }
+    
+    // Function to check if a link is an internal section link AND the section exists
+    function isValidInternalLink(href) {
+        if (!href || !href.startsWith('#')) return false;
+        const targetElement = document.querySelector(href);
+        return targetElement !== null;
+    }
+    
+    // Active link highlighting based on scroll position (only for same-page navigation)
     function highlightActiveNavItem() {
         const scrollPosition = window.scrollY;
         
         // Find which section is currently in view
         document.querySelectorAll('.content-section').forEach(section => {
-            const sectionTop = section.offsetTop - 60; // Reduced from 100 to match smaller navbar
+            const sectionTop = section.offsetTop - 60;
             const sectionBottom = sectionTop + section.offsetHeight;
             const sectionId = section.getAttribute('id');
             
-            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            if (sectionId && scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${sectionId}`) {
                         link.classList.add('active');
-                        
-                        // Center active link in horizontal scroll
-                        const linkParent = link.parentElement;
-                        
-                        if (linkParent && navContainer) {
-                            const linkOffset = linkParent.offsetLeft;
-                            const linkWidth = linkParent.offsetWidth;
-                            const containerWidth = navContainer.offsetWidth;
-                            
-                            // Calculate scroll position to center the active link
-                            const scrollTo = linkOffset - (containerWidth / 2) + (linkWidth / 2);
-                            
-                            // Smooth scroll the navbar horizontally
-                            navContainer.scrollTo({
-                                left: scrollTo,
-                                behavior: 'smooth'
-                            });
-                        }
+                        centerActiveLink(link);
                     }
                 });
             }
         });
     }
     
-    // Initial call and scroll event listener for active highlighting
-    highlightActiveNavItem();
-    window.addEventListener('scroll', highlightActiveNavItem);
+    // Center active link in horizontal scroll
+    function centerActiveLink(activeLink) {
+        if (!activeLink || !navContainer) return;
+        
+        const linkParent = activeLink.parentElement;
+        if (linkParent) {
+            const linkOffset = linkParent.offsetLeft;
+            const linkWidth = linkParent.offsetWidth;
+            const containerWidth = navContainer.offsetWidth;
+            
+            // Calculate scroll position to center the active link
+            const scrollTo = linkOffset - (containerWidth / 2) + (linkWidth / 2);
+            
+            // Smooth scroll the navbar horizontally
+            navContainer.scrollTo({
+                left: scrollTo,
+                behavior: 'smooth'
+            });
+        }
+    }
     
-    // Smooth scrolling for nav links
+    // Highlight current page in navigation
+    function highlightCurrentPage() {
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            const linkText = link.textContent.toLowerCase().trim();
+            
+            // Remove any existing active classes
+            link.classList.remove('active');
+            
+            // Add active class based on current page and link type
+            if (currentPage === 'index.html' || currentPage === '') {
+                if (linkText === 'home') {
+                    link.classList.add('active');
+                    centerActiveLink(link);
+                }
+            } else if (linkHref === currentPage) {
+                link.classList.add('active');
+                centerActiveLink(link);
+            }
+        });
+    }
+    
+    // Handle navigation clicks
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            if (this.getAttribute('href').startsWith('#')) {
+            const href = this.getAttribute('href');
+            
+            console.log('Clicked link:', href, 'Current page:', currentPage); // Debug log
+            
+            // Handle external page links - let browser navigate normally
+            if (isExternalPageLink(href)) {
+                console.log('External link - allowing normal navigation'); // Debug log
+                // Don't prevent default, let the browser handle it
+                return true;
+            }
+            
+            // Handle internal section links - only if section exists on current page
+            if (isValidInternalLink(href)) {
+                console.log('Valid internal link - smooth scrolling'); // Debug log
                 e.preventDefault();
                 
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+                const targetElement = document.querySelector(href);
+                const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                const targetPosition = targetElement.offsetTop - navHeight;
                 
-                if (targetElement) {
-                    const navHeight = document.querySelector('nav').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - navHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                return false;
             }
+            
+            // For invalid internal links (sections that don't exist), allow normal navigation
+            console.log('Invalid internal link - allowing normal navigation'); // Debug log
+            return true;
         });
     });
     
-    // Add keyboard navigation for horizontal scrolling
-    navContainer.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            navContainer.scrollBy({ left: -100, behavior: 'smooth' });
-        } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            navContainer.scrollBy({ left: 100, behavior: 'smooth' });
-        }
-    });
+    // Initial setup - update navigation first, then highlight
+    updateNavigation();
+    highlightCurrentPage();
     
-    // Mouse wheel horizontal scrolling
-    navContainer.addEventListener('wheel', function(e) {
-        if (e.deltaY !== 0) {
-            e.preventDefault();
-            navContainer.scrollBy({ left: e.deltaY * 2, behavior: 'smooth' });
-        }
-    });
+    // Only add scroll listener if there are valid sections on the page
+    if (document.querySelectorAll('.content-section[id]').length > 0) {
+        highlightActiveNavItem();
+        window.addEventListener('scroll', highlightActiveNavItem);
+    }
+    
+    // Add keyboard navigation for horizontal scrolling
+    if (navContainer) {
+        navContainer.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                navContainer.scrollBy({ left: -100, behavior: 'smooth' });
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                navContainer.scrollBy({ left: 100, behavior: 'smooth' });
+            }
+        });
+        
+        // Mouse wheel horizontal scrolling
+        navContainer.addEventListener('wheel', function(e) {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                navContainer.scrollBy({ left: e.deltaY * 2, behavior: 'smooth' });
+            }
+        });
+    }
     
     // Add name with typing effect (preserved from original code)
     const nameElement = document.querySelector('.name');
@@ -102,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (charIndex < nameText.length) {
                 nameElement.textContent += nameText.charAt(charIndex);
                 charIndex++;
-                setTimeout(typeWriter, 150); // Adjust typing speed (150ms between characters)
+                setTimeout(typeWriter, 150);
             } else {
                 // Add blinking cursor effect after typing is complete
                 setTimeout(() => {
@@ -114,6 +264,84 @@ document.addEventListener('DOMContentLoaded', function() {
         // Start typing effect after a short delay
         setTimeout(typeWriter, 1000);
     }
+
+    // Month tab functionality for internship page (added from your internship page)
+    const monthTabs = document.querySelectorAll('.month-tab');
+    const monthContents = document.querySelectorAll('.month-content');
+    
+    monthTabs.forEach((tab, index) => {
+        tab.addEventListener('click', function() {
+            monthTabs.forEach(t => t.classList.remove('active'));
+            monthContents.forEach(c => c.classList.remove('active'));
+            
+            this.classList.add('active');
+            if (monthContents[index]) {
+                monthContents[index].classList.add('active');
+            }
+        });
+    });
+
+    // Form validation (for contact form)
+    function validateForm() {
+        const name = document.getElementById('name');
+        const phone = document.getElementById('phone');
+        const message = document.getElementById('message');
+
+        if (name && phone && message) {
+            if (name.value.trim() === '') {
+                alert('Please enter your name');
+                name.focus();
+                return false;
+            }
+
+            if (phone.value.trim() === '') {
+                alert('Please enter your phone number');
+                phone.focus();
+                return false;
+            }
+
+            const phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone.value.replace(/\D/g, ''))) {
+                alert('Please enter a valid 10-digit phone number');
+                phone.focus();
+                return false;
+            }
+
+            if (message.value.trim() === '') {
+                alert('Please enter your message');
+                message.focus();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Attach form validation to form if it exists
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            if (!validateForm()) {
+                e.preventDefault();
+            }
+        });
+    }
+
+    // Animation on scroll for internship cards
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    document.querySelectorAll('.internship-card').forEach(card => {
+        observer.observe(card);
+    });
     
     // Mobile touch scrolling for navbar
     let isDown = false;
@@ -160,16 +388,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Disable mobile navbar functionality (hamburger menu, etc.)
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileMenu = document.querySelector('.mobile-menu');
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
     
-    if (mobileMenuToggle) {
-        mobileMenuToggle.style.display = 'none';
-    }
-    
-    if (mobileMenu) {
-        mobileMenu.style.display = 'none';
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            if (navContainer) navContainer.classList.toggle('active');
+            if (navMenu) navMenu.classList.toggle('active');
+        });
     }
     
     // Ensure navbar is always horizontal scrolling on all screen sizes
@@ -180,13 +408,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Make all nav items display inline and center them
-    const navMenu = document.querySelector('.nav-menu');
     if (navMenu) {
         navMenu.style.display = 'flex';
         navMenu.style.flexWrap = 'nowrap';
         navMenu.style.justifyContent = 'center';
         navMenu.style.alignItems = 'center';
     }
+
+    console.log('Navigation system initialized for:', currentPage);
 });
 
 // Additional utility functions for responsive behavior
