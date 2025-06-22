@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Education</title>
 
-  <link  rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
 
   <!-- AOS Animation CDN -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
@@ -17,122 +17,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
+    /* Only education page specific styles - no navbar overrides */
     :root {
       --primary-color: #00ffe7;
       --dark-bg: #0f0f0f;
       --card-bg: #1c1c1c;
       --text-light: #f1f1f1;
       --text-gray: #ccc;
-      --navbar-height: 70px;
-    }
-
-    body {
-      background-color: var(--dark-bg);
-      color: var(--text-light);
-      overflow-x: hidden;
-      padding-top: var(--navbar-height); /* Space for fixed navbar */
-    }
-
-    /* Navbar Styles */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--navbar-height);
-      background-color: rgba(15, 15, 15, 0.95);
-      backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 5%;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .navbar.scrolled {
-      height: 60px;
-      background-color: rgba(10, 10, 10, 0.98);
-    }
-
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--text-light);
-      letter-spacing: 1px;
-    }
-
-    .logo span {
-      color: var(--primary-color);
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-    }
-
-    .nav-links li {
-      margin: 0 15px;
-    }
-
-    .nav-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: 400;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary-color);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      background: var(--primary-color);
-      bottom: -5px;
-      left: 0;
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-links .active {
-      color: var(--primary-color);
-    }
-
-    .burger {
-      display: none;
-      cursor: pointer;
-    }
-
-    .burger .line {
-      width: 25px;
-      height: 3px;
-      background-color: var(--text-light);
-      margin: 5px;
-      border-radius: 3px;
-      transition: all 0.3s ease;
     }
 
     /* Main Content Styles */
     .container {
       max-width: 1100px;
-      margin: 30px auto;
+      margin: 50px auto;
       padding: 0 20px;
     }
 
@@ -234,23 +131,7 @@
       margin: 15px 0;
     }
 
-    ul {
-      margin-top: 12px;
-      padding-left: 20px;
-    }
-
-    ul li {
-      margin-bottom: 8px;
-      position: relative;
-      padding-left: 5px;
-    }
-
-    ul li::before {
-      content: "▹";
-      position: absolute;
-      left: -15px;
-      color: var(--primary-color);
-    }
+   
 
     /* Skills badges */
     .skills {
@@ -312,10 +193,6 @@
       box-shadow: 0 5px 15px rgba(0, 255, 231, 0.2);
     }
 
-    .institution-button:active {
-      transform: scale(0.98);
-    }
-
     .institution-button i {
       margin-left: 8px;
       transition: transform 0.3s ease;
@@ -336,303 +213,206 @@
       animation: buttonPulse 0.5s ease;
     }
 
-    /* Additional animations */
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    /* Media Queries for Responsiveness */
-    @media (max-width: 992px) {
-      .container {
-        padding: 0 30px;
-      }
-    }
-
+    /* Responsive adjustments for education content */
     @media (max-width: 768px) {
       .page-title h1 {
         font-size: 2rem;
       }
-
+      
       .education-box {
         padding: 20px;
       }
-
+      
       .edu-title {
-        font-size: 1.4rem;
-      }
-
-      .edu-subtitle {
-        font-size: 1rem;
-      }
-
-      /* Navbar mobile view */
-      .nav-links {
-        position: absolute;
-        right: 0;
-        top: var(--navbar-height);
-        background-color: var(--card-bg);
-        height: calc(100vh - var(--navbar-height));
-        width: 70%;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding-top: 30px;
-        transform: translateX(100%);
-        transition: transform 0.5s ease;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .nav-links.active {
-        transform: translateX(0);
-      }
-
-      .nav-links li {
-        margin: 20px 0;
-      }
-
-      .burger {
-        display: block;
-      }
-
-      .burger.active .line:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-      }
-
-      .burger.active .line:nth-child(2) {
-        opacity: 0;
-      }
-
-      .burger.active .line:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
+        font-size: 1.3rem;
       }
     }
 
     @media (max-width: 480px) {
-      .container {
-        padding: 0 15px;
-      }
-
       .page-title h1 {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
       }
-
-      .edu-title {
-        font-size: 1.2rem;
-      }
-
+      
       .education-box {
         padding: 15px;
       }
-
-      .nav-links {
-        width: 100%;
+      
+      .edu-title {
+        font-size: 1.1rem;
+      }
+      
+      .skills {
+        gap: 5px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Fixed Navbar -->
-  <nav class="navbar">
-    <div class="logo">Port<span>folio</span></div>
-    <ul class="nav-links">
-      <li><a href="index.html#home">Home</a></li>
-      <li><a href="index.html#achievements">Achievements</a></li>
-      <li><a href="index.html#certifications">Certifications</a></li>
-      <li><a href="index.html#internships">Internships</a></li>
-      <li><a href="index.html#projects">Projects</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="hobbies.html">Hobbies</a></li>
-      <li><a href="education.html" class="active">Education</a></li>
-    </ul>
-    <div class="burger">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
-  </nav>
+    <header>
+        <nav>
+            <!-- Navbar with Horizontal Scroll - Same as index.html -->
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#achievements">Achievements</a></li>
+                    <li><a href="index.html#certifications">Certifications</a></li>
+                    <li><a href="Internship.html">Internships</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="Hobbies.html">Hobbies</a></li>
+                    <li><a href="education.html" class="active">Education</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-  <div class="container">
-    <div class="page-title" data-aos="fade-down">
-      <h1>My Educational Journey</h1>
-      <p>A chronological overview of my academic background and achievements</p>
-    </div>
-
-    <!-- Degree Section -->
-    <div class="education-box" data-aos="fade-up" data-aos-delay="100">
-      <div class="edu-title">Bachelor of Technology in Computer Science and Engineering(Artificial Intelligence & Machine Learning)</div>
-      <div class="edu-subtitle">
-        <i class="fas fa-university"></i> Narasaraopeta Engineering College | 2022 - 2026
-      </div>
-      <div class="edu-divider"></div>
-      <div class="edu-details">
-        <p><strong>CGPA:</strong> 8.56/10</p>  
-        <p><strong>Relevant Courses:</strong> Python,Data Structures, Machine Learning, Operating Systems, DBMS</p>
-        
-        <p><strong>Achievements:</strong></p>
-        <ul>
-          <li>Developed a house price prediction web app for the Mini-Project.</li>
-          <li>Completed internship in Data Science at MVG Innovations for 3-months.</li>
-          <li>Participated in Smart India Hackathon 2023 and 2024.</li>
-        </ul>
-        
-        <div class="skills">
-          <div class="skill-badge">Python</div>
-          <div class="skill-badge">Machine Learning</div>
-          <div class="skill-badge">Web Development</div>
-          <div class="skill-badge">Data Structures</div>
+    <div class="container">
+        <div class="page-title" data-aos="fade-down">
+            <h1>My Educational Journey</h1>
+            <p>A chronological overview of my academic background and achievements</p>
         </div>
-        
-        <a href="#" class="institution-button" data-school="narasaraopeta-engineering-college">
-          Visit College Website <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </div>
 
-    <!-- Intermediate Section -->
-    <div class="education-box" data-aos="fade-up" data-aos-delay="200">
-      <div class="edu-title">Intermediate (Class 12) – MPC Stream</div>
-      <div class="edu-subtitle">
-        <i class="fas fa-school"></i> Scholars Junior College | 2020 - 2022
-      </div>
-      <div class="edu-divider"></div>
-      <div class="edu-details">
-        <p><strong>Percentage:</strong> 92.5%</p>  
-        <p><strong>Subjects:</strong> Maths, Physics, Chemistry, English</p>
-        
-        <p><strong>Achievements:</strong></p>
-        <ul>
-          <li>Top 5% scorer in Physics and Mathematics.</li>
-          <li>Participated in state-level quiz competition.</li>
-          <li>Served as class representative and organized science fair.</li>
-        </ul>
-        
-        <div class="skills">
-          <div class="skill-badge">Mathematics</div>
-          <div class="skill-badge">Physics</div>
-          <div class="skill-badge">Chemistry</div>
+        <!-- Degree Section -->
+        <div class="education-box" data-aos="fade-up" data-aos-delay="100">
+            <div class="edu-title">Bachelor of Technology in Computer Science and Engineering(Artificial Intelligence & Machine Learning)</div>
+            <div class="edu-subtitle">
+                <i class="fas fa-university"></i> Narasaraopeta Engineering College | 2022 - 2026
+            </div>
+            <div class="edu-divider"></div>
+            <div class="edu-details">
+                <p><strong>CGPA:</strong> 8.56/10</p>  
+                <p><strong>Relevant Courses:</strong> Python,Data Structures, Machine Learning, Operating Systems, DBMS</p>
+                
+                <p><strong>Achievements:</strong></p>
+                <ul>
+                    <li>Developed a house price prediction web app for the Mini-Project.</li>
+                    <li>Completed internship in Data Science at MVG Innovations for 3-months.</li>
+                    <li>Participated in Smart India Hackathon 2023 and 2024.</li>
+                </ul>
+                
+                <div class="skills">
+                    <div class="skill-badge">Python</div>
+                    <div class="skill-badge">Machine Learning</div>
+                    <div class="skill-badge">Web Development</div>
+                    <div class="skill-badge">Data Structures</div>
+                </div>
+                
+                <a href="#" class="institution-button" data-school="narasaraopeta-engineering-college">
+                    Visit College Website <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
-        
-        <a href="#" class="institution-button" data-school="scholars-junior-college">
-          Visit College Website <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-    </div>
 
-    <!-- High School Section -->
-    <div class="education-box" data-aos="fade-up" data-aos-delay="300">
-      <div class="edu-title"> SSC (Class 10)</div>
-      <div class="edu-subtitle">
-        <i class="fas fa-graduation-cap"></i> Montessori English Medium School | 2019 - 2020
-      </div>
-      <div class="edu-divider"></div>
-      <div class="edu-details">
-        <p><strong>GPA:</strong> 591/600</p>
-        
-        <p><strong>Achievements:</strong></p>
-        <ul>
-          <li>School Topper in Science and Math.</li>
-          <li>Won School level Spell Bee Competition.</li>
-          <li>Held leadership roles in school clubs and activities.</li>
-        </ul>
-        
-        <div class="skills">
-          <div class="skill-badge">Science</div>
-          <div class="skill-badge">Mathematics</div>
-          <div class="skill-badge">Leadership</div>
-          <div class="skill-badge">Team Management</div>
+        <!-- Intermediate Section -->
+        <div class="education-box" data-aos="fade-up" data-aos-delay="200">
+            <div class="edu-title">Intermediate (Class 12) – MPC Stream</div>
+            <div class="edu-subtitle">
+                <i class="fas fa-school"></i> Scholars Junior College | 2020 - 2022
+            </div>
+            <div class="edu-divider"></div>
+            <div class="edu-details">
+                <p><strong>Percentage:</strong> 92.5%</p>  
+                <p><strong>Subjects:</strong> Maths, Physics, Chemistry, English</p>
+                
+                <p><strong>Achievements:</strong></p>
+                <ul>
+                    <li>Top 5% scorer in Physics and Mathematics.</li>
+                    <li>Participated in state-level quiz competition.</li>
+                    <li>Served as class representative and organized science fair.</li>
+                </ul>
+                
+                <div class="skills">
+                    <div class="skill-badge">Mathematics</div>
+                    <div class="skill-badge">Physics</div>
+                    <div class="skill-badge">Chemistry</div>
+                </div>
+                
+                <a href="#" class="institution-button" data-school="scholars-junior-college">
+                    Visit College Website <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
-        
-        <a href="#" class="institution-button" data-school="montessori-english-medium-school">
-          Visit School Website <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
+
+        <!-- High School Section -->
+        <div class="education-box" data-aos="fade-up" data-aos-delay="300">
+            <div class="edu-title"> SSC (Class 10)</div>
+            <div class="edu-subtitle">
+                <i class="fas fa-graduation-cap"></i> Montessori English Medium School | 2019 - 2020
+            </div>
+            <div class="edu-divider"></div>
+            <div class="edu-details">
+                <p><strong>GPA:</strong> 591/600</p>
+                
+                <p><strong>Achievements:</strong></p>
+                <ul>
+                    <li>School Topper in Science and Math.</li>
+                    <li>Won School level Spell Bee Competition.</li>
+                    <li>Held leadership roles in school clubs and activities.</li>
+                </ul>
+                
+                <div class="skills">
+                    <div class="skill-badge">Science</div>
+                    <div class="skill-badge">Mathematics</div>
+                    <div class="skill-badge">Leadership</div>
+                    <div class="skill-badge">Team Management</div>
+                </div>
+                
+                <a href="#" class="institution-button" data-school="montessori-english-medium-school">
+                    Visit School Website <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- AOS Animation Script -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  
-  <!-- Custom Scripts -->
-  <script>
-    // Initialize AOS animation library
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100
-    });
+    <footer>
+        <p class="copyright">Copyright 2025 Karthik. All Rights Reserved.</p>
+    </footer>
 
-    // Navbar functionality
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li');
-    const navbar = document.querySelector('.navbar');
-
-    // Toggle navbar
-    burger.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      burger.classList.toggle('active');
-      
-      // Animate links
-      navLinks.forEach((link, index) => {
-        if (link.style.animation) {
-          link.style.animation = '';
-        } else {
-          link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-        }
-      });
-    });
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!nav.contains(e.target) && !burger.contains(e.target) && nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        burger.classList.remove('active');
-      }
-    });
+    <!-- AOS Animation Script -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js" defer></script>
     
-    // Institution buttons click handler with animation
-    const institutionButtons = document.querySelectorAll('.institution-button');
-    
-    // Map to store institution URLs (replace these with your actual URLs)
-    const institutionUrls = {
-      'narasaraopeta-engineering-college': 'https://www.nrtec.in/',
-      'scholars-junior-college': 'https://www.schooldetails.org/andhra-pradesh/guntur/piduguralla/peduguralla/scholars-junior-college-28171700397',
-      'montessori-english-medium-school': 'https://schools.org.in/guntur/28171700378/montessori-ems-pdrl.html'
-    };
-    
-    institutionButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
+    <!-- Custom Scripts -->
+    <script>
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
         
-        // Add animation class
-        this.classList.add('button-clicked');
+        // Institution buttons click handler with animation
+        const institutionButtons = document.querySelectorAll('.institution-button');
         
-        // Get the school identifier from data attribute
-        const schoolId = this.getAttribute('data-school');
-        const targetUrl = institutionUrls[schoolId];
+        // Map to store institution URLs (replace these with your actual URLs)
+        const institutionUrls = {
+            'narasaraopeta-engineering-college': 'https://www.nrtec.in/',
+            'scholars-junior-college': 'https://www.schooldetails.org/andhra-pradesh/guntur/piduguralla/peduguralla/scholars-junior-college-28171700397',
+            'montessori-english-medium-school': 'https://schools.org.in/guntur/28171700378/montessori-ems-pdrl.html'
+        };
         
-        // After animation completes, navigate to the URL
-        setTimeout(() => {
-          window.location.href = targetUrl;
-        }, 500); // Match this with the animation duration
-      });
-      
-      // Remove animation class after animation completes
-      button.addEventListener('animationend', function() {
-        this.classList.remove('button-clicked');
-      });
-    });
-  </script>
+        institutionButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Add animation class
+                this.classList.add('button-clicked');
+                
+                // Get the school identifier from data attribute
+                const schoolId = this.getAttribute('data-school');
+                const targetUrl = institutionUrls[schoolId];
+                
+                // After animation completes, navigate to the URL
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 500); // Match this with the animation duration
+            });
+            
+            // Remove animation class after animation completes
+            button.addEventListener('animationend', function() {
+                this.classList.remove('button-clicked');
+            });
+        });
+    </script>
 </body>
-</html>
+</html> 
