@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthik's Achievements</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <style>
+        /* Basic body and layout styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header and Navigation Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(30, 30, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            padding: 1rem 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-menu li a {
+            color: #e0ffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: block;
+        }
+
+        .nav-menu li a:hover {
+            color: aqua;
+            transform: translateY(-2px);
+        }
+
+        /* Active nav item highlighting */
+        .nav-menu li a.active {
+            color: aqua !important;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu li a.active:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main content container */
+        .main-content {
+            padding-top: 80px; /* Space for fixed navbar */
+        }
+
+        /* FIXED HEADING STYLES */
+        .achievements-heading {
+            text-align: center;
+            margin: 2rem auto;
+            color: aqua;
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            width: fit-content;
+            padding: 0 2rem;
+            display: block;
+            position: relative;
+        }
+
+        .achievements-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, aqua, lightseagreen, transparent);
+            border-radius: 2px;
+        }
+
+        .achievements-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem 2rem;
+        }
+
+        .achievement-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: aqua;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, lightseagreen, transparent);
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(30, 30, 47, 0.9), rgba(40, 40, 60, 0.8));
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .achievement-card:hover::before {
+            left: 100%;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, aqua, lightseagreen);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .achievement-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #e0ffff;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .achievement-provider {
+            font-size: 1rem;
+            color: lightseagreen;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-description {
+            color: #d0ffff;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .achievement-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 255, 0.2);
+            color: aqua;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .view-achievement-btn {
+            background: linear-gradient(135deg, aqua, lightseagreen);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .view-achievement-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+            background: linear-gradient(135deg, lightseagreen, aqua);
+        }
+
+        .view-achievement-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 60%;
+            max-width: 800px;
+            max-height: 90vh;
+            background: linear-gradient(135deg, rgba(30, 30, 47, 0.95), rgba(40, 40, 60, 0.95));
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            overflow: hidden;
+            animation: modalSlideIn 0.4s ease-out;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, aqua, lightseagreen);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            color: black;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .achievement-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-image:hover {
+            transform: scale(1.02);
+        }
+
+        .achievement-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(32, 178, 170, 0.1));
+            border: 2px dashed rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: lightseagreen;
+        }
+
+        .placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .placeholder-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .placeholder-subtext {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            background: rgba(30, 30, 47, 0.5);
+        }
+
+        .copyright {
+            color: #d0ffff;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .achievement-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .achievement-card:nth-child(1) { animation-delay: 0.1s; }
+        .achievement-card:nth-child(2) { animation-delay: 0.2s; }
+        .achievement-card:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding-top: 70px;
+            }
+
+            .achievements-heading {
+                font-size: 2.2rem;
+                margin: 1.5rem auto;
+                padding: 0 1rem;
+            }
+            
+            .achievement-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .achievements-container {
+                padding: 1rem;
+            }
+            
+            .category-title {
+                font-size: 1.6rem;
+            }
+
+            .modal-content {
+                width: 90%;
+                margin: 1rem;
+            }
+
+            .modal-header {
+                padding: 1rem 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+                color: black;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+                padding: 0.8rem 0;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="achievements.html" class="active">Achievements</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                    <li><a href="Internship.html">Internships</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="Hobbies.html">Hobbies</a></li>
+                    <li><a href="education.html">Education</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h1 class="achievements-heading">My Achievements</h1>
+        
+        <div class="achievements-container">
+            <!-- Programming Achievement -->
+            <div class="achievement-category">
+                <h2 class="category-title">💻 Programming Excellence</h2>
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🏆</div>
+                        <h3 class="achievement-title">LeetCode Problem Solving</h3>
+                        <p class="achievement-provider">LeetCode Platform</p>
+                        <p class="achievement-description">Successfully solved more than 200+ programming problems on LeetCode, demonstrating strong problem-solving skills and algorithmic thinking. This achievement showcases my dedication to continuous learning and mastery of data structures and algorithms.</p>
+                        <div class="achievement-skills">
+                            <span class="skill-tag">Data Structures</span>
+                            <span class="skill-tag">Algorithms</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">Coding</span>
+                        </div>
+                        <button class="view-achievement-btn" onclick="openLeetCodeProfile()">View LeetCode Profile</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Achievement -->
+            <div class="achievement-category">
+                <h2 class="category-title">🏢 Professional Experience</h2>
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">💼</div>
+                        <h3 class="achievement-title">Professional Internship</h3>
+                        <p class="achievement-provider">MVG Innovations</p>
+                        <p class="achievement-description">Completed a comprehensive internship at MVG Innovations, where I gained hands-on experience in real-world software development projects. This opportunity allowed me to apply my theoretical knowledge in professional environment and learn industry best practices.</p>
+                        <div class="achievement-skills">
+                            <span class="skill-tag">Software Development</span>
+                            <span class="skill-tag">Team Collaboration</span>
+                            <span class="skill-tag">Project Management</span>
+                            <span class="skill-tag">Industry Standards</span>
+                        </div>
+                        <a href="Internship.html" class="view-achievement-btn">View Internship Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Achievement -->
+            <div class="achievement-category">
+                <h2 class="category-title">🚀 Innovation & Projects</h2>
+                <div class="achievement-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">⚡</div>
+                        <h3 class="achievement-title">Innovative Projects</h3>
+                        <p class="achievement-provider">Personal & Academic Projects</p>
+                        <p class="achievement-description">Developed numerous interesting projects in Machine Learning and Full Stack development. These projects demonstrate my ability to work with cutting-edge technologies and create solutions that make a real impact. From ML algorithms to complete web applications.</p>
+                        <div class="achievement-skills">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Full Stack Development</span>
+                            <span class="skill-tag">Innovation</span>
+                            <span class="skill-tag">Problem Solving</span>
+                        </div>
+                        <a href="projects.html" class="view-achievement-btn">Explore Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Achievement Modal -->
+    <div id="achievementModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Achievement</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="achievementContainer">
+                    <!-- Achievement image or placeholder will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p class="copyright">Copyright 2025 Karthik. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Modal functionality
+        function openModal(title, imagePath) {
+            const modal = document.getElementById('achievementModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const achievementContainer = document.getElementById('achievementContainer');
+            
+            modalTitle.textContent = title;
+            
+            // Create image element
+            const img = document.createElement('img');
+            img.className = 'achievement-image';
+            img.alt = title + ' Achievement';
+            img.src = imagePath;
+            
+            // Handle image load error - show placeholder
+            img.onerror = function() {
+                achievementContainer.innerHTML = `
+                    <div class="achievement-placeholder">
+                        <div class="placeholder-icon">🏆</div>
+                        <div class="placeholder-text">Achievement Image</div>
+                        <div class="placeholder-subtext">Image not available - Please add your achievement image</div>
+                    </div>
+                `;
+            };
+            
+            // Handle successful image load
+            img.onload = function() {
+                achievementContainer.innerHTML = '';
+                achievementContainer.appendChild(img);
+            };
+            
+            // Show modal
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('achievementModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('achievementModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Function to open LeetCode profile
+        function openLeetCodeProfile() {
+            // Replace this URL with your actual LeetCode profile URL
+            const leetcodeURL = "https://leetcode.com/u/Karthik__45/";
+            window.open(leetcodeURL, '_blank');
+        }
+    </script>
+</body>
+</html>
