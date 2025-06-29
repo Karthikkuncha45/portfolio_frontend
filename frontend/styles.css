@@ -234,7 +234,7 @@ nav {
 @keyframes fadeInRight {
     from {
         opacity: 0;
-        transform: translateX(50px);
+        transform: translateX(10px);
     }
     to {
         opacity: 1;
@@ -499,7 +499,7 @@ nav {
     font-size: 1.1rem; /* Reduced from 1.75rem */
     font-weight: bold;
     margin-bottom: 0.8rem; /* Reduced from 1.25rem */
-    color: var(--secondary-color);
+    color: black;
     position: relative;
     display: inline-block;
 }
@@ -761,6 +761,7 @@ footer {
     
     .social-heading, .form-heading {
         font-size: 1rem; /* Reduced from 1.5rem */
+        color: black;
     }
 }
 
