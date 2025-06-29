@@ -8,58 +8,89 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-menu li a');
     
     // Define navigation mappings for different pages
-    const navigationMap = {
-        'index.html': {
-            'home': '#home',
-            'achievements': '#achievements', 
-            'certifications': '#certifications',
-            'internships': 'Internship.html',
-            'projects': '#projects',
-            'skills': 'skills.html',
-            'hobbies': 'Hobbies.html',
-            'education': 'education.html'
-        },
-        'Internship.html': {
-            'home': 'index.html',
-            'achievements': 'index.html#achievements',
-            'certifications': 'index.html#certifications', 
-            'internships': 'Internship.html',
-            'projects': 'index.html#projects',
-            'skills': 'skills.html',
-            'hobbies': 'Hobbies.html',
-            'education': 'education.html'
-        },
-        'skills.html': {
-            'home': 'index.html',
-            'achievements': 'index.html#achievements',
-            'certifications': 'index.html#certifications',
-            'internships': 'Internship.html', 
-            'projects': 'index.html#projects',
-            'skills': 'skills.html',
-            'hobbies': 'Hobbies.html',
-            'education': 'education.html'
-        },
-        'Hobbies.html': {
-            'home': 'index.html',
-            'achievements': 'index.html#achievements',
-            'certifications': 'index.html#certifications',
-            'internships': 'Internship.html',
-            'projects': 'index.html#projects', 
-            'skills': 'skills.html',
-            'hobbies': 'Hobbies.html',
-            'education': 'education.html'
-        },
-        'education.html': {
-            'home': 'index.html',
-            'achievements': 'index.html#achievements',
-            'certifications': 'index.html#certifications',
-            'internships': 'Internship.html',
-            'projects': 'index.html#projects',
-            'skills': 'skills.html', 
-            'hobbies': 'Hobbies.html',
-            'education': 'education.html'
-        }
-    };
+   const navigationMap = {
+    'index.html': {
+        'home': 'index.html',
+        'achievements': 'achievements.html',
+        'certifications': 'certifications.html',
+        'internships': 'Internship.html',
+        'projects': 'projects.html',
+        'skills': 'skills.html',
+        'hobbies': 'Hobbies.html',
+        'education': 'education.html'
+    },
+    'Internship.html': {
+        'home': 'index.html',
+        'achievements': 'achievements.html',
+        'certifications': 'certifications.html',
+        'internships': 'Internship.html',
+        'projects': 'projects.html',
+        'skills': 'skills.html',
+        'hobbies': 'Hobbies.html',
+        'education': 'education.html'
+    },
+    'skills.html': {
+        'home': 'index.html',
+        'achievements': 'achievements.html',
+        'certifications': 'certifications.html',
+        'internships': 'Internship.html',
+        'projects': 'projects.html',
+        'skills': 'skills.html',
+        'hobbies': 'Hobbies.html',
+        'education': 'education.html'
+    },
+    'Hobbies.html': {
+        'home': 'index.html',
+        'achievements': 'achievements.html',
+        'certifications': 'certifications.html',
+        'internships': 'Internship.html',
+        'projects': 'projects.html',
+        'skills': 'skills.html',
+        'hobbies': 'Hobbies.html',
+        'education': 'education.html'
+    },
+    'education.html': {
+        'home': 'index.html',
+        'achievements': 'achievements.html',
+        'certifications': 'certifications.html',
+        'internships': 'Internship.html',
+        'projects': 'projects.html',
+        'skills': 'skills.html',
+        'hobbies': 'Hobbies.html',
+        'education': 'education.html'
+    },
+    'certifications.html': {
+        'home': 'index.html',
+        'achievements': 'achievements.html',
+        'certifications': 'certifications.html',
+        'internships': 'Internship.html',
+        'projects': 'projects.html',
+        'skills': 'skills.html',
+        'hobbies': 'Hobbies.html',
+        'education': 'education.html'
+    },
+    'projects.html': {
+        'home': 'index.html',
+        'achievements': 'achievements.html',
+        'certifications': 'certifications.html',
+        'internships': 'Internship.html',
+        'projects': 'projects.html',
+        'skills': 'skills.html',
+        'hobbies': 'Hobbies.html',
+        'education': 'education.html'
+    },
+    'achievements.html': {
+        'home': 'index.html',
+        'achievements': 'achievements.html',
+        'certifications': 'certifications.html',
+        'internships': 'Internship.html',
+        'projects': 'projects.html',
+        'skills': 'skills.html',
+        'hobbies': 'Hobbies.html',
+        'education': 'education.html'
+    }
+};
+    
 
     // Update navigation links based on current page
     function updateNavigation() {
@@ -127,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    //active page 
     
     // Center active link in horizontal scroll
     function centerActiveLink(activeLink) {
